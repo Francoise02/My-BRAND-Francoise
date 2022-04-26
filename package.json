@@ -1,0 +1,23 @@
+{
+  "name": "my-brand-francoise",
+  "version": "1.0.0",
+  "description": "This repo will contain my personal website and blog that will explicitly detail my up-to-date programing experience with the Andela Technical Leadership Program and beyond.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Francoise02/My-BRAND-Francoise.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Francoise02/My-BRAND-Francoise/issues"
+  },
+  "homepage": "https://github.com/Francoise02/My-BRAND-Francoise#readme",
+  "dependencies": {
+    "express": "^4.18.0"
+  }
+}
