@@ -98,19 +98,19 @@
                 class="close" title="Close Modal">&times;</span>
                 
                   <!-- Modal Content -->
-                  <form class="modal-content animate" action="/action_page.php">
+                  <form id= "loginForm" class="modal-content animate" >
                     <div class="imgcontainer">
                    
                     </div>
                 
                     <div class="container">
-                      <label for="uname"><b>Username</b></label>
-                      <input type="text" placeholder="Enter Username" name="uname" required>
+                      <label for="uname"><b>Email</b></label>
+                      <input type="text" placeholder="Enter Username" name="email" required>
                 
                       <label for="psw"><b>Password</b></label>
                       <input type="password" placeholder="Enter Password" name="psw" required>
                 
-                      <button type="submit"> <a href="dashboard.html">Login</a></button>
+                      <button type="submit"> Login</button>
                       <label>
                         <input type="checkbox" checked="checked" name="remember"> Remember me
                       </label>
@@ -161,3 +161,66 @@
               100% { opacity: 1; }
             }
           </style></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<script>
+const server = "https://my-brand-backend1.herokuapp.com/"
+const form = document.querySelector("#loginForm")
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  try {
+      const response = await fetch(server + "api/v1/login", {
+          method: 'POST', 
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              email: form.email.value,
+              password: form.psw.value
+          }),
+      })
+      const data = await response.json()
+      console.log(data)
+
+
+      if (response.status == 201) {
+        swal("succefully logged in", data.messsage, "success").then(()=>{
+          localStorage.setItem("token", "Bearer " + data.token)
+          location.href = "./dashboard.html"
+        })
+      }
+
+      if  (response.status == 404)
+      swal("User not found", data.message, "error").then(
+        () => {
+          location.href= "admin.html"
+        }
+      )
+
+      if  (response.status == 403)
+      swal("Incorrect password", data.message, "error").then(
+        () => {
+          location.href= "admin.html"
+        }
+      )
+
+      if  (response.status == 500)
+      swal("User not found", data.message, "error").then(
+        () => {
+          location.href= "admin.html"
+        })
+
+    }
+    
+    catch(err) { 
+      console.log(err)
+
+    }})
+ 
+
+  </script>

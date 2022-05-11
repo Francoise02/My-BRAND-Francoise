@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
+      <link rel="stylesheet" href="../css/dashboard.css">
+      <!-- Boxicons CDN Link -->
+      <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     </head>
+     <html lang="en-US" itemscope="" itemtype="http://schema.org/WebPage" class="avif webp"><head>
+      
+      <title>Mukantwari Francoise – Full stack developer | Sofitware Engineer &amp; Database Administrator</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+  
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <!-- main container start-->
+    <div class="sidebar">
+        <div class="logo-details">
+          <i class='bx bxl-c-plus-plus'></i>
+          <span class="logo_name">Françoise</span>
+        </div>
+          <ul class="nav-links">
+            <li>
+              <a href="dashboard.html" class="active">
+                <i class='bx bx-grid-alt' ></i>
+                <span class="links_name">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="blog.html">
+                <i class='bx bx-box' ></i>
+                <span class="links_name">Blogs</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-list-ul' ></i>
+                <span class="links_name">Add Blog</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-pie-chart-alt-2' ></i>
+                <span class="links_name">Subscribers</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-coin-stack' ></i>
+                <span class="links_name">Messages</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-book-alt' ></i>
+                <span class="links_name">Comments</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Team</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-message' ></i>
+                <span class="links_name">Querries</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-heart' ></i>
+                <span class="links_name">Likes</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-cog' ></i>
+                <span class="links_name">Setting</span>
+              </a>
+            </li>
+            <li class="log_out">
+              <a href="#">
+                <i class='bx bx-log-out'></i>
+                <span class="links_name">Log out</span>
+              </a>
+            </li>
+          </ul>
+      </div>
+       
+
+                    <main>
+                        <div class="row ">
+                            <div class=" col-md-12">
+                                <div class="card">
+                                    <div class=" card-header">
+                                       Create New Blog
+                                    </div>
+
+                                    <div class="card-body">
+                                        <form id="form" action="/add_post" method="POST">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <span class="text-danger" id="title-error"></span>
+                                                    <span class="label label-default">Add Title <i
+                                                            class="text-danger">*</i></span>
+
+                                                    <input type="text" name="title" id="title" class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <span class="text-danger" id="img-error"></span>
+
+                                                    <span class="label label-default">Post Description<i
+                                                            class="text-danger">*</i></span>
+
+                                                    <input type="text" name="blogdescription" id="blogdescription"
+                                                        class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <span class="text-danger" id="description-error"></span>
+
+                                                    <span class="label label-default">More details<i
+                                                            class="text-danger">*</i></span>
+
+                                                    <textarea name="detail" id="detail" class="form-control " rows="5"
+                                                        required="required"></textarea>
+
+                                                </div>
+                                                <!-- <button type="submit" value="Save">PUBLISH</button> -->
+                                                <input type="submit" value="Submit" id="submit" />
+                                                <div class="col-md-3">
+                                                </div>
+                                                <!-- <input type="submit" value="Save" class="btn btn-primary-1"> -->
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+
+                </div>
+            </section>
+        </div>
+      
+    </div>
+    
+
+
+
+</body>
+
+</html>

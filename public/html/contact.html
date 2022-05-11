@@ -26,12 +26,10 @@
                 <span class="name">Mukantwari <span>Françoise</span></span>
                     <div id="main-navigation-collapse" class="collapse navbar-collapse"><ul id="menu-main-menu" class="nav navbar-nav navbar-right"><li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a title="About" href="index.html">Home</a></li>
                         <li id="menu-item-912" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-912"><a title="About me" href="about.html">About me</a></li>
-<li id="menu-item-46" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46"><a title="Hire Me" href="mywork.html">My Work</a></li>
-
-
-<li id="menu-item-3334" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3334"><a title="Praise" href="admin.html">Admin</a></li>
-<li id="menu-item-45" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45"><a title="Contact" href="contact.html">Contact</a></li>
-<li id="menu-item-124" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-124"><a title="Blog" href="blog.html">Blog</a></li>
+                        <li id="menu-item-46" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-46"><a title="Hire Me" href="mywork.html">My Work</a></li>
+                        <li id="menu-item-3334" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-3334"><a title="Praise" href="admin.html">Admin</a></li>
+                        <li id="menu-item-45" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-45"><a title="Contact" href="contact.html">Contact</a></li>
+                        <li id="menu-item-124" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-124"><a title="Blog" href="blog.html">Blog</a></li>
 
 </ul></div>			</div><!-- /.container-fluid -->
         </nav><!-- #site-navigation -->
@@ -62,24 +60,27 @@
                             <div class="blurb">
 
                                 <div class="contactForm">
-                <form>
+                <form id="contactForm">
                     <h2>Send Message</h2>
                     <div class="inputBox">
-                        <input type="text" name="" required="required">
+                        <input type="text" name="fullname" required="required">
                         <span>Full name</span>
                     </div>
                     <div class="inputBox">
-                        <input type="text" name="" required="required">
+                        <input type="text" name="email" required="required">
                         <span>Email</span>
                     </div>
-                    <div class="inputBox">
-                        <textarea required="required"></textarea>
+                    <div class="inputBox"> 
+                        <textarea name="message" required="required"></textarea> 
                         <span>Type your Message...</span>
                     </div>
-                    <div class="inputBox">
+
+                    <button class="btn btn-accent btn-lg btn-lets-talk" class="inputBox" type="submit"> Send</button>
+
+                    <!-- <div class="inputBox">
                         <input type="submit" name="" value="Send" class="btn btn-accent btn-lg btn-lets-talk" required="required">
             
-                    </div>
+                    </div> -->
                 </form>
             </div>
                                 
@@ -144,3 +145,60 @@
           100% { opacity: 1; }
         }
       </style></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
+
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<script>
+const server = "https://my-brand-backend1.herokuapp.com/"
+const form = document.querySelector("#contactForm")
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  try {
+      const response = await fetch(server + "api/v1/add_querry", {
+          method: 'POST', 
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              fullname: form.fullname.value,
+              email: form.email.value,
+              message: form.message.value
+
+          }),
+      })
+      const data = await response.json()
+      console.log(data)
+
+
+if (response.status == 201) {
+        swal("Message sent", data.messsage, "success").then(()=>{
+          localStorage.setItem("token", "Bearer " + data.token)
+          location.href = "contact.html"
+        })
+      }
+
+      if  (response.status == 400)
+      swal("Missing message", data.message, "error").then(
+        () => {
+          location.href= "contact.html"
+        }
+      )
+
+      if  (response.status == 500)
+      swal("Error occured", data.message, "error").then(
+        () => {
+          location.href= "contact.html"
+        })
+
+    }
+    
+    catch(err) { 
+      console.log(err)
+
+    }})
+    </script>
