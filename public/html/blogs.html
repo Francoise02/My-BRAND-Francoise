@@ -159,7 +159,7 @@ function myFunction(x) {
 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">SUBSCRIBE</button>
 
 <div id="id01" class="modal">
-    <form class="modal-content animate" action="/action_page.php" method="post">
+    <form class="modal-content animate" action="/action_page.php" method="post" id="subForm">
         <div class="imgcontainer">
           <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
         </div>
@@ -218,3 +218,55 @@ function myFunction(x) {
               100% { opacity: 1; }
             }
           </style></body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
+
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<script>
+const server = "https://my-brand-backend1.herokuapp.com/"
+const form = document.querySelector("#subForm")
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  try {
+      const response = await fetch(server + "api/v1/add_sub", {
+          method: 'POST', 
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              fullname: form.name.value,
+              email: form.mail.value
+          }),
+      })
+      const data = await response.json()
+      console.log(data)
+
+
+      if (data.status == 200) {
+        alert("subscribed!")
+        swal("subscribed!", data.messsage, "success").then(()=>{
+          // localStorage.setItem("token", "Bearer " + data.token)
+          location.href = "blogs.html"
+        })
+      }
+
+
+      // if  (response.status == 500)
+      // swal("User not found", data.message, "error").then(
+      //   () => {
+      //     location.href= "admin.html"
+      //   })
+
+    }
+    
+    catch(err) { 
+      console.log(err)
+
+    }})
+ 
+
+  </script>

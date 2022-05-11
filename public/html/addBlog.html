@@ -37,7 +37,7 @@
               </a>
             </li>
             <li>
-              <a href="blog.html">
+              <a href="webblogs.html">
                 <i class='bx bx-box' ></i>
                 <span class="links_name">Blogs</span>
               </a>
@@ -63,13 +63,13 @@
             <li>
               <a href="#">
                 <i class='bx bx-book-alt' ></i>
-                <span class="links_name">Comments</span>
+                <span class="links_name">Team</span>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a href="../html/addUser.html">
                 <i class='bx bx-user' ></i>
-                <span class="links_name">Team</span>
+                <span class="links_name">Add user</span>
               </a>
             </li>
             <li>
@@ -130,7 +130,7 @@
                                                 <div class="form-group">
                                                     <span class="text-danger" id="description-error"></span>
 
-                                                    <span class="label label-default">More details<i
+                                                    <span class="label label-default">Add Content<i
                                                             class="text-danger">*</i></span>
 
                                                     <textarea name="detail" id="detail" class="form-control " rows="5"
@@ -163,3 +163,53 @@
 </body>
 
 </html>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<script>
+  const server = "https://my-brand-backend1.herokuapp.com/"
+  const form = document.querySelector("#form");
+  form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      var title = form.title.value;
+      var content = form.detail.value;
+      var category = form.blogdescription.value;
+
+
+      try {
+          // const formData = new FormData();
+          // formData.append("title", title);
+          // formData.append("content", content);
+          // formData.append("category", category);
+
+          response = await fetch(server + "api/v1/add_post", {
+              method: "POST",
+              headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              },
+              // body: JSON.stringify(formData) 
+              body: JSON.stringify({
+              title: form.title.value,
+              content: form.detail.value,
+              category: form.blogdescription.value,
+              
+          })});
+          const data = await response.json();
+          console.log(data);
+
+          swal("successfully added", data.message, "success")
+
+          form.title.value = "",
+              form.blogdescription.value = "",
+              detail.innerHTML = ""
+      }
+      catch (error) {
+          console.log(error);
+      }
+
+  });
+
+</script>

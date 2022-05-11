@@ -48,7 +48,7 @@
             <section class="typed-main">
                 <div class="wrap">
 
-                    <div class="content">
+                    <div class="content" font-type="Robotto"> 
                         <h2 >Contact Us</h2>
                         <p>For any inquiries, concerns or feedback :)
                         </p>
@@ -106,10 +106,10 @@
             </div>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <div class="icons">
-                <a href="#"><i class="fa fa-linkedin-square" style="font-size:70px"></i></a>
-                <a href="#"><i class="fa fa-github-square" style="font-size:70px"></i></a>
+                <a href="https://www.linkedin.com/in/mukantwari-francoise-6882921b5/"><i class="fa fa-linkedin-square" style="font-size:70px"></i></a>
+                <a href="https://github.com/Francoise02"><i class="fa fa-github-square" style="font-size:70px"></i></a>
                 <a href="#"><i class="fa fa-skype-square" style="font-size:70px"></i></a>
-                <a href="#"><i class="fa fa-twitter-square" style="font-size:70px"></i></a>
+                <a href="https://twitter.com/Coisewacu"><i class="fa fa-twitter-square" style="font-size:70px"></i></a>
                 <a href="#"><i class="fa fa-facebook-square" style="font-size:70px"></i></a>
                 <a href="#"><i class="fa fa-instagram" style="font-size:70px"></i></a>
                 
@@ -154,8 +154,12 @@
 <script>
 const server = "https://my-brand-backend1.herokuapp.com/"
 const form = document.querySelector("#contactForm")
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
+  const fullname = form.fullname.value
+  const email = form.email.value
+  const message = form.message.value
 
   try {
       const response = await fetch(server + "api/v1/add_querry", {
@@ -167,34 +171,41 @@ form.addEventListener("submit", async (e) => {
           body: JSON.stringify({
               fullname: form.fullname.value,
               email: form.email.value,
-              message: form.message.value
+              message: form.message.value,
+        // auth: {
+        // user: "f.mukantwari@alustudent.com", // generated ethereal user
+        // pass: process.env.MAIL_PASSWORD, // generated ethereal password
 
           }),
       })
       const data = await response.json()
       console.log(data)
 
+      swal("Message sent", data.message, "success")
 
-if (response.status == 201) {
-        swal("Message sent", data.messsage, "success").then(()=>{
-          localStorage.setItem("token", "Bearer " + data.token)
-          location.href = "contact.html"
-        })
-      }
 
-      if  (response.status == 400)
-      swal("Missing message", data.message, "error").then(
-        () => {
-          location.href= "contact.html"
-        }
-      )
+// if (response.status == 201) {
+//         swal("Message sent", "Message sent", "success").then(()=>{
+//         //   localStorage.setItem("token", "Bearer " + data.token)
+//           location.href = "contact.html"
+//         })
+//       }
 
-      if  (response.status == 500)
-      swal("Error occured", data.message, "error").then(
-        () => {
-          location.href= "contact.html"
-        })
+//       if  (response.status == 400)
+//       swal("Missing message", data.message, "error").then(
+//         () => {
+//           location.href= "contact.html"
+//         }
+//       )
 
+//       if  (response.status == 500){
+
+//           swal("Error occured", data.message, "error").then(
+//               () => {
+//                   location.href= "contact.html"
+//                 })
+                
+            
     }
     
     catch(err) { 

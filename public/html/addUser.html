@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/addUser.css">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <html lang="en-US" itemscope="" itemtype="http://schema.org/WebPage" class="avif webp"><head>
+    
+  <title>Mukantwari Francoise – Full stack developer | Sofitware Engineer &amp; Database Administrator</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Add the user</title> -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- <link rel="stylesheet" type="text/css" href="../css/dashboard.css"> -->
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <div class="logo-details">
+          <i class='bx bxl-c-plus-plus'></i>
+          <span class="logo_name">Françoise</span>
+        </div>
+          <ul class="nav-links">
+            <li>
+              <a href="#" class="active">
+                <i class='bx bx-grid-alt' ></i>
+                <span class="links_name">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="webblogs.html">
+                <i class='bx bx-box' ></i>
+                <span class="links_name">Blogs</span>
+              </a>
+            </li>
+            <li>
+              <a href="addBlog.html">
+                <i class='bx bx-list-ul' ></i>
+                <span class="links_name">Add Blog</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-pie-chart-alt-2' ></i>
+                <span class="links_name">Subscribers</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-coin-stack' ></i>
+                <span class="links_name">Messages</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-book-alt' ></i>
+                <span class="links_name">Team</span>
+              </a>
+            </li>
+            <li>
+              <a href="./addUser.html">
+                <i class='bx bx-user' ></i>
+                <span class="links_name">Add user</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-message' ></i>
+                <span class="links_name">Upvotes</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-heart' ></i>
+                <span class="links_name">Downvotes</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class='bx bx-cog' ></i>
+                <span class="links_name">Setting</span>
+              </a>
+            </li>
+            <li class="log_out">
+              <a href="#">
+                <i class='bx bx-log-out'></i>
+                <span class="links_name">Log out</span>
+              </a>
+            </li>
+          </ul>
+      </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-6 main">
+                <form id= "signUp" action="/sign_up" method="POST">
+                    <h2>SignUp Form</h2>
+                    <input type="text" class="box" id="name" name="name" placeholder="Name" required />
+                    <br>
+                    <input type="text" class="box" id="email" name="email" placeholder="Email" required />
+                    <br>
+                    <input type="text" class="box" id="password" name="password" placeholder="Password" required />
+                    <br>
+                    <br>
+                    <!-- <input type="submit" value="Submit" id="submit" /> -->
+                    <button type="submit" id="submit"> Submit</button>
+                </form>
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<script>
+const server = "https://my-brand-backend1.herokuapp.com/"
+const form = document.querySelector("#signUp")
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  try {
+      const response = await fetch(server + "api/v1/add_user", {
+          method: 'POST', 
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              username: form.name.value,
+              email: form.email.value,
+              password: form.password.value
+          }),
+      })
+      const data = await response.json()
+      console.log(data)
+
+      swal("successfully added", data.message, "success")
+    //   if (response.status == 200) {
+    //     swal("Succefully Added user", data.messsage, "success").then(()=>{
+    //       localStorage.setItem("token", "Bearer " + data.token)
+    //       location.href = "./admin.html"
+    //     })
+    //   }
+
+    //   if  (response.status == 404)
+    //   swal("User not found", data.message, "error").then(
+    //     () => {
+    //       location.href= "admin.html"
+    //     }
+    //   )
+
+    //   if  (response.status == 403)
+    //   swal("Incorrect password", data.message, "error").then(
+    //     () => {
+    //       location.href= "admin.html"
+    //     }
+    //   )
+
+    //   if  (response.status == 500)
+    //   swal("Error occured", data.message, "error").then(
+    //     () => {
+    //       location.href= "dashboard.html"
+    //     })
+
+    }
+    
+    catch(err) { 
+      console.log(err)
+
+    }})
+ 
+
+  </script>
